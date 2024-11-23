@@ -24,9 +24,7 @@ export class UserController {
       res.status(200).json({
         success: true,
         message: "Login Successfully",
-        result: {
-          result
-        }
+        result
       });
     } catch (error) {
       next(error);

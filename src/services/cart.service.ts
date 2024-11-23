@@ -1,5 +1,5 @@
 import { User } from "@prisma/client";
-import { CartResponse, CreateCartRequest, toCartResponse } from "../models/cart.model";
+import { CartResponse, CreateCartRequest, DeleteCartRequest, toCartResponse } from "../models/cart.model";
 import { CartValidation } from "../validation/cart.validation";
 import { Validation } from "../validation/validation";
 import { ProductService } from "./product.service";
@@ -36,12 +36,26 @@ export class CartService {
         product: true
       }
     });
-    console.log(carts);
 
     return carts.map((cart) => {
       const response = toCartResponse(cart);
       response.products = cart.product ? [toProductResponse(cart.product)] : [];
       return response;
     });
+  }
+
+  static async remove(request: DeleteCartRequest): Promise<CartResponse> {
+    const removeRequest = Validation.validate(
+      CartValidation.DELETE,
+      request
+    );
+
+    const cart = await prismaClient.cartItem.delete({
+      where: {
+        id: removeRequest.cartId
+      }
+    });
+
+    return toCartResponse(cart);
   }
 }

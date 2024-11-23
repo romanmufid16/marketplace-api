@@ -19,7 +19,6 @@ export const authMiddleware = (req: UserRequest, res: Response, next: NextFuncti
       return res.status(403).json({ message: "Invalid token" })
     }
     req.user = user as User;
-    console.log("Authenticated User: ", req.user);
     next();
   });
 }

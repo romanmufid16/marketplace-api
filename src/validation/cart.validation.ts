@@ -5,4 +5,8 @@ export class CartValidation {
     productId: z.string().uuid(),
     quantity: z.number().int().positive()
   });
+
+  static readonly DELETE: ZodType = z.object({
+    id: z.string().uuid()
+  });
 }

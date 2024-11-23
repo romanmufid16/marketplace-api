@@ -12,3 +12,4 @@ privateRoutes.delete('/products/:id/delete', ProductController.removeProduct);
 
 privateRoutes.post('/carts/create', CartController.createCart);
 privateRoutes.get('/carts', CartController.getCartItems);
+privateRoutes.delete('/carts/:id/delete', CartController.createCart);
