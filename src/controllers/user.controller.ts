@@ -25,7 +25,7 @@ export class UserController {
         success: true,
         message: "Login Successfully",
         result: {
-          token: result
+          result
         }
       });
     } catch (error) {

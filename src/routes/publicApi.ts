@@ -6,6 +6,3 @@ export const publicRoutes = express.Router();
 
 publicRoutes.post('/users/register', UserController.register);
 publicRoutes.post('/users/auth', UserController.login);
-
-publicRoutes.post('/products/create', ProductController.create);
-publicRoutes.get('/products', ProductController.getProducts);
