@@ -7,6 +7,7 @@ export type ProductResponse = {
   price: Prisma.Decimal;
   stock: number;
   category: string;
+  imageUrl: string;
 }
 
 export type CreateProductRequest = {
@@ -15,6 +16,7 @@ export type CreateProductRequest = {
   price: Prisma.Decimal;
   stock: number;
   category: string;
+  imageUrl: string;
 }
 
 export type GetProductRequest = {
@@ -44,6 +46,7 @@ export function toProductResponse(product: Product): ProductResponse {
     description: product.description,
     price: product.price,
     stock: product.stock,
-    category: product.category
+    category: product.category,
+    imageUrl: product.imageUrl
   }
 }

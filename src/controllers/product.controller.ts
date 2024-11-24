@@ -5,7 +5,12 @@ import { ProductService } from "../services/product.service";
 export class ProductController {
   static async create(req: Request, res: Response, next: NextFunction) {
     try {
-      const request: CreateProductRequest = req.body;
+      const request: CreateProductRequest = {
+        ...req.body,
+        price: Number(req.body.price),
+        stock: Number(req.body.stock),
+        imageUrl: req.file ? req.file.filename : ''
+      };
       const result = await ProductService.create(request);
       res.status(201).json({
         success: true,

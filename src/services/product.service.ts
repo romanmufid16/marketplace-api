@@ -28,6 +28,10 @@ export class ProductService {
       request
     );
 
+    if (request.imageUrl) {
+      productRequest.imageUrl = request.imageUrl;
+    }
+
     const product = await prismaClient.product.create({
       data: productRequest
     });

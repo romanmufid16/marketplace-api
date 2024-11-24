@@ -32,6 +32,7 @@ model Product {
   price       Decimal     @db.Decimal(10, 2)
   stock       Int
   category    String
+  imageUrl    String
   reviews     Review[]
   cartItems   CartItem[]
   createdAt   DateTime    @default(now())

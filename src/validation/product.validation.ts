@@ -6,7 +6,8 @@ export class ProductValidation {
     description: z.string().min(1).max(100),
     price: z.number(),
     stock: z.number().positive(),
-    category: z.string().min(1).max(100)
+    category: z.string().min(1).max(100),
+    imageUrl: z.string().min(1).max(190)
   });
 
   static readonly QUERY: ZodType = z.object({
