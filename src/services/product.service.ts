@@ -58,9 +58,7 @@ export class ProductService {
 
     if (query.category) {
       filters.push({
-        category: {
-          contains: query.category,
-        }
+        categoryId: query.category
       });
     }
 

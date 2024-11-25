@@ -1,3 +1,4 @@
+import { User } from "@prisma/client";
 import { prismaClient } from "../app/database";
 import { ResponseError } from "../lib/error.response";
 import { generateToken } from "../lib/token";
@@ -60,6 +61,15 @@ export class UserService {
     return {
       token
     }
+  }
 
+  static async getUser(user: User): Promise<UserResponse> {
+    const userData = await prismaClient.user.findUnique({
+      where:{
+        id: user.id,
+      }
+    });
+
+    return toUserResponse(userData!);
   }
 }

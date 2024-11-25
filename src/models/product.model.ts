@@ -6,8 +6,9 @@ export type ProductResponse = {
   description: string;
   price: Prisma.Decimal;
   stock: number;
-  category: string;
+  categoryId: string;
   imageUrl: string;
+  merchantId: string;
 }
 
 export type CreateProductRequest = {
@@ -15,8 +16,9 @@ export type CreateProductRequest = {
   description: string;
   price: Prisma.Decimal;
   stock: number;
-  category: string;
+  categoryId: string;
   imageUrl: string;
+  merchantId: string;
 }
 
 export type GetProductRequest = {
@@ -34,7 +36,8 @@ export type UpdateProductRequest = {
   description?: string;
   price?: Prisma.Decimal;
   stock?: number;
-  category?: string;
+  categoryId?: string;
+  merchantId?: string;
 }
 
 export type RemoveProductRequest = GetByIdProductRequest;
@@ -46,7 +49,8 @@ export function toProductResponse(product: Product): ProductResponse {
     description: product.description,
     price: product.price,
     stock: product.stock,
-    category: product.category,
-    imageUrl: product.imageUrl
+    categoryId: product.categoryId,
+    imageUrl: product.imageUrl,
+    merchantId: product.merchantId
   }
 }

@@ -18,26 +18,52 @@ model User {
   name      String
   email     String     @unique
   password  String
+  role      Role       @default(user)
   orders    Order[]
   cartItems CartItem[]
   reviews   Review[]
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
+  merchants Merchant[]
+}
+
+enum Role {
+  user
+  merchant
+}
+
+model Category {
+  id       String    @id @default(uuid())
+  name     String
+  products Product[]
+}
+
+model Merchant {
+  id          String  @id @default(uuid())
+  userId      String
+  name        String  @db.VarChar(255)
+  description String? @db.Text
+
+  user     User      @relation(fields: [userId], references: [id])
+  products Product[]
 }
 
 model Product {
   id          String      @id @default(uuid())
+  merchantId  String
   name        String
-  description String
+  description String      @db.Text
   price       Decimal     @db.Decimal(10, 2)
   stock       Int
-  category    String
+  categoryId  String
   imageUrl    String
   reviews     Review[]
   cartItems   CartItem[]
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
   OrderItem   OrderItem[]
+  category    Category    @relation(fields: [categoryId], references: [id])
+  merchant    Merchant    @relation(fields: [merchantId], references: [id])
 }
 
 model Order {
@@ -74,7 +100,7 @@ model Review {
   userId    String
   productId String
   rating    Int // 1-5 stars
-  review    String
+  review    String   @db.Text
   user      User     @relation(fields: [userId], references: [id])
   product   Product  @relation(fields: [productId], references: [id])
   createdAt DateTime @default(now())

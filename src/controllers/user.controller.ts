@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { LoginRequest, RegisterRequest } from "../models/user.model";
+import { LoginRequest, RegisterRequest, UserRequest } from "../models/user.model";
 import { UserService } from "../services/user.service";
 
 export class UserController {
@@ -24,6 +24,19 @@ export class UserController {
       res.status(200).json({
         success: true,
         message: "Login Successfully",
+        result
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static async getUser(req: UserRequest, res: Response, next: NextFunction) {
+    try {
+      const result = await UserService.getUser(req.user!);
+      res.status(200).json({
+        success: true,
+        message: "User Data Successfully Retrivied",
         result
       });
     } catch (error) {

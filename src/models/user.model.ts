@@ -4,6 +4,7 @@ import { Request } from "express";
 export type UserResponse = {
   name: string;
   email: string;
+  role: string;
 }
 
 export type RegisterRequest = {
@@ -24,7 +25,8 @@ export type LoginResponse = {
 export function toUserResponse(user: User): UserResponse {
   return {
     name: user.name,
-    email: user.email
+    email: user.email,
+    role: user.role
   }
 }
 
